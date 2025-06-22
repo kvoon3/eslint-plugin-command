@@ -2,9 +2,11 @@ import type { Command } from 'eslint-plugin-command/commands'
 import type { CompletionItemProvider, Disposable } from 'vscode'
 import { objectKeys } from '@antfu/utils'
 import { builtinCommands } from 'eslint-plugin-command/commands'
+import { ofetch } from 'ofetch'
 import { useDisposable } from 'reactive-vscode'
 import { CompletionItem, CompletionItemKind, CompletionList, languages, MarkdownString, SnippetString } from 'vscode'
 import { config } from './config'
+import { logger } from './utils'
 
 const triggerConditionMap = {
   '@': /\/\//,
@@ -41,8 +43,6 @@ const provider: CompletionItemProvider = {
               : b.length - a.length, // prefer full name
           )
           .join(', ')
-        // TODO: use eslint-plugin-command docs
-        item.documentation = new MarkdownString('')
 
         // eslint-disable-next-line prefer-template
         const snippetLabel = ('${1:' + label + '}') // -> vscode snippet template: ${1: the-command-name}
@@ -63,6 +63,24 @@ const provider: CompletionItemProvider = {
     }
     catch {
       return new CompletionList()
+    }
+  },
+  async resolveCompletionItem(item) {
+    const getContent = async () => {
+      const { name } = builtinCommands.find(i => [i.name, ...(i?.alias || [])].includes(item.label as string))!
+      try {
+        const content = await ofetch(`https://raw.githubusercontent.com/antfu/eslint-plugin-command/refs/heads/main/src/commands/${name}.md`)
+        return new MarkdownString(content)
+      }
+      catch (error) {
+        logger.error('error', error)
+      }
+    }
+    getContent()
+
+    return {
+      ...item,
+      documentation: await getContent(),
     }
   },
 }

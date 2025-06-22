@@ -33,6 +33,7 @@ catalog:
   lint-staged: ^16.1.2
   lodash.merge: 4.6.2
   nip: ^1.1.0
+  ofetch: ^1.4.1
   pnpm: ^10.12.1
   reactive-vscode: ^0.3.0
   rimraf: ^6.0.1

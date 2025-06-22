@@ -71,6 +71,7 @@
     "lint-staged": "catalog:",
     "lodash.merge": "catalog:",
     "nip": "catalog:",
+    "ofetch": "catalog:",
     "pnpm": "catalog:",
     "rimraf": "catalog:",
     "semver": "catalog:",

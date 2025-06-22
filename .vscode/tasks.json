@@ -18,7 +18,7 @@
           "background": {
             "activeOnStart": true,
             "beginsPattern": "Build start",
-            "endsPattern": "(B|Reb)uild complete"
+            "endsPattern": "(B|Reb)uild success"
           }
         }
       ],
