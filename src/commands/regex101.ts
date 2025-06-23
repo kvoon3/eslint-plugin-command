@@ -7,9 +7,10 @@ const reCodeBlock = /```(.*)\n([\s\S]*)\n```/
 export const regex101: Command = {
   name: 'regex101',
   /**
-   * @regex101 https://regex101.com/?regex=%28%5Cb%7C%5Cs%7C%5E%29%28%40regex101%29%28%5Cs%5CS%2B%29%3F%28%5Cb%7C%5Cs%7C%24%29&flavor=javascript
+   * @regex101 https://regex101.com/?regex=%28%5Cb%7C%5Cs%7C%5E%29%28%5B%2F%40%3A%5Dregex101%29%28%5Cs%5CS%2B%29%3F%28%5Cb%7C%5Cs%7C%24%29&flavor=javascript
    */
-  match: /(\b|\s|^)(@regex101)(\s\S+)?(\b|\s|$)/,
+  match: /(\b|\s|^)([/@:]regex101)(\s\S+)?(\b|\s|$)/,
+  cases: ['regex101'],
   commentType: 'both',
   action(ctx) {
     const literal = ctx.findNodeBelow((n) => {

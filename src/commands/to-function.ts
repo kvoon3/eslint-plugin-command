@@ -2,7 +2,7 @@ import type { Command, Tree } from '../types'
 
 export const toFunction: Command = {
   name: 'to-function',
-  alias: ['to-fn', '2f'],
+  cases: ['to-fn', '2f', 'tf'],
   match: /^\s*[/:@]\s*(to-(?:fn|function)|2f|tf)$/,
   action(ctx) {
     const arrowFn = ctx.findNodeBelow('ArrowFunctionExpression')

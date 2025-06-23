@@ -15,13 +15,13 @@ export interface Command {
    */
   name: string
   /**
-   * The alias of the command name
-   */
-  alias?: string[]
-  /**
    * RegExp to match the comment, without the leading `//` or `/*`
    */
   match: RegExp | ((comment: Tree.Comment) => RegExpMatchArray | boolean | undefined | null)
+  /**
+   * Available cases to match the comment
+   */
+  cases?: string[]
   /**
    * The type of the comment. By default commands are only matched with line comments.
    *

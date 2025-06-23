@@ -2,7 +2,7 @@ import type { Command } from '../types'
 
 export const noType: Command = {
   name: 'no-type',
-  alias: ['nt'],
+  cases: ['no-type', 'nt'],
   match: /^\s*[/:@]\s*(no-type|nt)$/,
   action(ctx) {
     const nodes = ctx.findNodeBelow({
