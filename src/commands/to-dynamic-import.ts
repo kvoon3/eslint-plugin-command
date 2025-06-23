@@ -2,7 +2,10 @@ import type { Command, Tree } from '../types'
 
 export const toDynamicImport: Command = {
   name: 'to-dynamic-import',
-  alias: ['dynamic-import'],
+  matchCases: [
+    '@dynamic-import',
+    '/dynamic-import',
+  ],
   match: /^\s*[/:@]\s*(?:to-|2)?(?:dynamic|d)(?:-?import)?$/i,
   action(ctx) {
     const node = ctx.findNodeBelow('ImportDeclaration')

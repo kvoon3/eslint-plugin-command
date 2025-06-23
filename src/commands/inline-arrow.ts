@@ -4,6 +4,12 @@ import { unwrapType } from './_utils'
 export const inlineArrow: Command = {
   name: 'inline-arrow',
   match: /^\s*[/:@]\s*(inline-arrow|ia)$/,
+  matchCases: [
+    '@inline-arrow',
+    '@ia',
+    '/inline-arrow',
+    '/ia',
+  ],
   action(ctx) {
     const arrowFn = ctx.findNodeBelow('ArrowFunctionExpression')
     if (!arrowFn)

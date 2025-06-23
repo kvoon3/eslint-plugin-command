@@ -6,6 +6,10 @@ export const keepAligned: Command = {
   name: 'keep-aligned',
   commentType: 'line',
   match: comment => comment.value.trim().match(reLine),
+  matchCases: [
+    '@keep-aligned , , ,',
+    '/keep-aligned , , ,',
+  ],
   action(ctx) {
     // this command applies to any node below
     const node = ctx.findNodeBelow(() => true)

@@ -11,6 +11,12 @@ const types = [
 export const noXAbove: Command = {
   name: 'no-x-above',
   match: new RegExp(`^\\s*[/:@]\\s*no-(${types.join('|')})-(above|below)$`),
+  matchCases: [
+    '@no-await-above',
+    '@no-await-below',
+    '/no-await-above',
+    '/no-await-below',
+  ],
   action(ctx) {
     const type = ctx.matches[1] as (typeof types)[number]
     const direction = ctx.matches[2] as 'above' | 'below'

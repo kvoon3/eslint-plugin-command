@@ -6,13 +6,20 @@ export interface KeepSortedInlineOptions {
 }
 
 const reLine = /^[/@:]\s*(?:keep-)?uni(?:que)?$/
-const reBlock = /(?:\b|\s)@keep-uni(?:que)?(?:\b|\s|$)/
+const reBlock = /(?:\b|\s)@(?:keep-)?uni(?:que)?(?:\b|\s|$)/
 
 export const keepUnique: Command = {
   name: 'keep-unique',
-  alias: ['uniq'],
   commentType: 'both',
   match: comment => comment.value.trim().match(comment.type === 'Line' ? reLine : reBlock),
+  matchCases: [
+    '@keep-unique',
+    '/keep-unique',
+    '@keep-uni',
+    '/keep-uni',
+    '@uni',
+    '/uni',
+  ],
   action(ctx) {
     const node = ctx.findNodeBelow('ArrayExpression')
     if (!node)
