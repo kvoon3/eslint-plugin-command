@@ -7,31 +7,31 @@ import { toBlockComment, toLineComment } from '../utils'
 describe('match-cases', async () => {
   for (const { name, cases = [], match, commentType = 'line' } of builtinCommands) {
     it(name, () => {
-      for (const matchCase of genMatchCases(cases, commentType)) {
+      for (const caseItem of genMatchCases(cases, commentType)) {
         if (isFunction(match)) {
           const toAssertMessage = (result: any) => [
             '',
-            `Expected: \`${matchCase}\``,
+            `Expected: \`${caseItem}\``,
             `Received: \`${result}\``,
           ].join('\n')
 
-          if (isString(matchCase)) {
-            const result = match(toLineComment(matchCase))
+          if (isString(caseItem)) {
+            const result = match(toLineComment(caseItem))
             assert(!!result, toAssertMessage(result))
           }
           else {
-            const result = match(toBlockComment(matchCase))
+            const result = match(toBlockComment(caseItem))
             assert(!!result, toAssertMessage(result))
           }
         }
         else {
-          if (isString(matchCase)) {
-            const value = toLineComment(matchCase).value
-            expect(value.match(match)?.[0]).toBe(matchCase)
+          if (isString(caseItem)) {
+            const value = toLineComment(caseItem).value
+            expect(value.match(match)?.[0]).toBe(caseItem)
           }
           else {
-            const value = toBlockComment(matchCase).value
-            expect(value.match(match)?.[0].trim()).toBe(matchCase[0])
+            const value = toBlockComment(caseItem).value
+            expect(value.match(match)?.[0].trim()).toBe(caseItem[0])
           }
         }
       }
